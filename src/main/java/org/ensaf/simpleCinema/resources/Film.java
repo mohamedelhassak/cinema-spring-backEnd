@@ -19,7 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor
+@Data  @NoArgsConstructor @AllArgsConstructor
 public class Film implements Serializable {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +30,15 @@ public class Film implements Serializable {
 	private String description;
 	private String realisateur;
 	private double duree;
-	private String photo;
+	private String photo;	
 	@ManyToOne
 	private Category category;
+	
 	@OneToMany(mappedBy = "film")
 	@JsonProperty(access = Access.WRITE_ONLY)
 	 private Collection<Projection> projections;
+	
+	
+	
+	
 }

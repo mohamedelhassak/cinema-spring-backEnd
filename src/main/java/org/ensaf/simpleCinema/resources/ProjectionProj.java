@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.config.Projection;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin("*")
-@Projection(name = "p1",types = {org.ensaf.simpleCinema.resources.Projection.class})
+@Projection(name = "projectionsProj",types = {org.ensaf.simpleCinema.resources.Projection.class})
 public interface ProjectionProj {
 	public Long getId();
 	public double getPrix();

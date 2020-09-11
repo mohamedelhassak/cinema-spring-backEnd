@@ -5,7 +5,7 @@ import java.util.List;
 
 
 import org.ensaf.simpleCinema.resources.Ticket;
-import org.ensaf.simpleCinema.services.TicketForm;
+import org.ensaf.simpleCinema.models.TicketForm;
 import org.ensaf.simpleCinema.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

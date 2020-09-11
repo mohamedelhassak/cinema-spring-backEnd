@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.ensaf.simpleCinema.models.TicketForm;
 import org.ensaf.simpleCinema.repositories.TicketRepository;
 import org.ensaf.simpleCinema.resources.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,6 +2,9 @@ package org.ensaf.simpleCinema.services;
 
 public interface ICinemaInitService {
 	
+		public void initUsers();
+		public void initRoles();
+		public void initRolesToUser();
 		public void initVilles();
 		public void initCinemas();
 		public void initSalles();

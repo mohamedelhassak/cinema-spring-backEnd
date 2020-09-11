@@ -1,4 +1,4 @@
-package org.ensaf.simpleCinema.services;
+package org.ensaf.simpleCinema.models;
 
 import java.util.ArrayList;
 import java.util.List;

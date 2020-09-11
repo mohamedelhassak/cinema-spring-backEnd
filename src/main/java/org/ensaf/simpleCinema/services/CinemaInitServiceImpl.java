@@ -10,6 +10,8 @@ import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
+import org.ensaf.simpleCinema.repositories.AppRoleRepository;
+import org.ensaf.simpleCinema.repositories.AppUserRepository;
 import org.ensaf.simpleCinema.repositories.CategoryRepository;
 import org.ensaf.simpleCinema.repositories.CinemaRepository;
 import org.ensaf.simpleCinema.repositories.FilmRepository;
@@ -19,6 +21,8 @@ import org.ensaf.simpleCinema.repositories.SalleRepository;
 import org.ensaf.simpleCinema.repositories.SeanceRepository;
 import org.ensaf.simpleCinema.repositories.TicketRepository;
 import org.ensaf.simpleCinema.repositories.VilleRepository;
+import org.ensaf.simpleCinema.resources.AppRole;
+import org.ensaf.simpleCinema.resources.AppUser;
 import org.ensaf.simpleCinema.resources.Category;
 import org.ensaf.simpleCinema.resources.Cinema;
 import org.ensaf.simpleCinema.resources.Film;
@@ -39,6 +43,8 @@ import net.bytebuddy.utility.RandomString;
 @Transactional
 public class CinemaInitServiceImpl implements ICinemaInitService {
 	@Autowired
+	private IAccountService accountService;
+	@Autowired
 	private VilleRepository villeRepository;
 	@Autowired
 	private CinemaRepository cinemaRepository;
@@ -56,10 +62,38 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
 	private ProjectionRepository projectionRepository;
 	@Autowired
 	private TicketRepository ticketRepository;
-	
+	@Override
+	public void initUsers() {
+		Stream.of("user","admin").forEach(u->{
+			AppUser user = new AppUser();
+			user.setUsername(u);
+			user.setPassword("1234");
+			accountService.saveUser(user);
+		});
+		
+	}
+
+	@Override
+	public void initRoles() {
+		Stream.of("ADMIN","USER").forEach(r->{
+			AppRole role = new AppRole();
+			role.setRole(r);
+			accountService.saveRole(role);
+		});
+		
+	}
+	@Override
+	public void initRolesToUser() {
+		accountService.addRoleToUser("admin", "ADMIN");
+		accountService.addRoleToUser("admin", "USER");
+		accountService.addRoleToUser("user", "USER");
+		
+	}
 	@Override
 	public void initVilles() {
-		Stream.of("casablanca","Marrakech","Rabat","Fes").forEach(v->{
+		Stream.of("Guercif","casablanca","Marrakech","Rabat","Fes",
+				"Agadir","Tanger","Taza","Mekenes","Sale","Ouajda",
+				"Tetouane","Nadour","Laayoun","Dakhla","Taoujtat").forEach(v->{
 			Ville ville = new Ville();
 			ville.setName(v);
 			villeRepository.save(ville);
@@ -151,11 +185,12 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
 	public void initProjections() {
 		double[] prices = new double[] {30,50,60,70,90,100};
 		java.util.List<Film> films =filmRepository.findAll();
+		System.out.println("lenght films"+films.size());
 		villeRepository.findAll().forEach(v->{
 			v.getCinemas().forEach(c->{
 				c.getSalles().forEach(s->{
 					int index =new Random().nextInt(films.size());
-//					
+				
 						seanceRepository.findAll().forEach(seance->{
 							Projection projection = new Projection();
 							projection.setDateProjection(new Date());
@@ -184,5 +219,9 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
 				ticketRepository.save(ticket);
 			});
 	}
+
+	
+
+	
 
 }
