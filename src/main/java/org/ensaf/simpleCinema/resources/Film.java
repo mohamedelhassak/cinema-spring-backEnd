@@ -30,7 +30,8 @@ public class Film implements Serializable {
 	private String description;
 	private String realisateur;
 	private double duree;
-	private String photo;	
+	private String photo;
+
 	@ManyToOne
 	private Category category;
 	

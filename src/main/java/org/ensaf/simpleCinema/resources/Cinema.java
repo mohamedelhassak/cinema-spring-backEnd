@@ -29,5 +29,7 @@ public class Cinema implements Serializable {
     @ManyToOne
     private Ville ville;
 
+
+
    
 }

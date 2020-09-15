@@ -25,15 +25,13 @@ public class CineService {
     private CinemaRepository cinemaRepository;
 
     public Cinema addCine( String cine , Long id) throws Exception, JsonProcessingException {
-        System.out.println(id);
+
         Cinema cinema  =null ;
-        if (id>0){
-            System.out.println("if");
+        if (id!=null){
             cinema =cinemaRepository.findById(id).get();
 
         }
-        else if (id<1){
-            System.out.println("else");
+        else if (id==null){
             cinema = new Cinema();
         }
 

@@ -23,7 +23,6 @@ public class TicketRestController {
 	@PostMapping("/payerTickets")
 	public List<Ticket> payerTicket(@RequestBody TicketForm ticketForm) {
 		return ticketService.payerTicket(ticketForm);
-		
 	}
 }
 

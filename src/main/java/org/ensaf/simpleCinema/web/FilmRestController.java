@@ -41,7 +41,7 @@ public class FilmRestController{
 	@PostMapping("/addFilm")
 	public Film addFilm(@RequestParam("file") MultipartFile file,
 				@RequestParam("film") String film) throws Exception, JsonProcessingException {
-		return filmService.addFilm(file,film, (long) -3);
+		return filmService.addFilm(file,film, null);
 	}
 
 	@PutMapping("/updateFilm/{id}")
@@ -56,7 +56,6 @@ public class FilmRestController{
 	public void addFilmImage(@RequestBody MultipartFile file ) throws Exception {
 		
 		 uploadService.uploadImage(file);
-		
 	}
 
 }

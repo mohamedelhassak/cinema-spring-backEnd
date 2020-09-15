@@ -29,10 +29,10 @@ public class SimpleCinemaApplication  implements CommandLineRunner  {
 	private RepositoryRestConfiguration repositoryRestConfiguration;
 	
     public static void main(String[] args) {
+
         SpringApplication.run(SimpleCinemaApplication.class, args);
        
-		
-    }
+	}
   
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

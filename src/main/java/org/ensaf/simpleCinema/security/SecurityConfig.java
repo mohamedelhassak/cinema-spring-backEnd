@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		  auth.userDetailsService(userDetailsService)
 		  	.passwordEncoder(bCryptPasswordEncoder);
+
 	}
 	
 	
@@ -46,14 +47,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and()
 		.authorizeRequests()
-//		.antMatchers("/register/**","/login/**").permitAll()
 		.antMatchers(HttpMethod.DELETE,"/films/**","/categories/**").hasAuthority("ADMIN")
 		.antMatchers(HttpMethod.GET,"/films/**","/categories/**").hasAuthority("ADMIN")
 		.anyRequest().permitAll()
 		.and()
 		.addFilter(new JWTAuthenticationFilter(authenticationManager()))
-		.addFilterBefore(new JWTAuthorizedFilter(),
-		UsernamePasswordAuthenticationFilter.class);
+		.addFilterBefore(new JWTAuthorizedFilter(),UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	

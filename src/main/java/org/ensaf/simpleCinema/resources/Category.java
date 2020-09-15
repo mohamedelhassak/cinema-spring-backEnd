@@ -20,6 +20,7 @@ public class Category implements Serializable {
     private Long id;
 	@Column(length = 75)
 	private String name;
+
 	@OneToMany(mappedBy = "category")
 	@JsonProperty(access =Access.WRITE_ONLY)
 	private Collection<Film>films;

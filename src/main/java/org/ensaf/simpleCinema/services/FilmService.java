@@ -22,24 +22,25 @@ public class FilmService {
     @Autowired
     private CategoryRepository categoryRepository;
     public Film addFilm(MultipartFile file,String film ,Long id) throws Exception, JsonProcessingException {
-        System.out.println(id);
         Film film2 =null ;
-        if (id>0){
-            System.out.println("if");
+        String filename =null;
+        if (id!=null){
             film2 =filmRepository.findById(id).get();
 
         }
-        else if (id<1){
-            System.out.println("else");
+        else if (id==null){
             film2 = new Film();
         }
 
         FilmRequestForm filmForm = new ObjectMapper().readValue(film, FilmRequestForm.class);
         System.out.println("film "+filmForm.getCategory());
         Category category = categoryRepository.findById(filmForm.getCategory()).get();
-        String filename = file.getOriginalFilename();
+        if (file!=null){
+            filename = file.getOriginalFilename();
+            Files.write(Paths.get(System.getProperty("user.home") + "/cinema-app-spring/images/"+filename), file.getBytes());
+        }
 
-        Files.write(Paths.get(System.getProperty("user.home") + "/cinema-app-spring/images/"+filename), file.getBytes());
+
 
         film2.setCategory(category);
         film2.setDate_sortie(filmForm.getDate_sortie());
@@ -47,7 +48,9 @@ public class FilmService {
         film2.setDuree(filmForm.getDuree());
         film2.setRealisateur(filmForm.getRealisateur());
         film2.setTitre(filmForm.getTitre());
-        film2.setPhoto(filename);
+        if (filename!=null){
+            film2.setPhoto(filename);
+        }
         filmRepository.save(film2);
 
         return film2;

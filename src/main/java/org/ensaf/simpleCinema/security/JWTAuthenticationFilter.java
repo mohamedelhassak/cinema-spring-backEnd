@@ -35,17 +35,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		this.authenticationManager = authenticationManager;
 	}
 
-
-
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
-		
-	
-		
+
 		try {
 			AppUser user = new ObjectMapper().readValue(request.getInputStream(), AppUser.class);
-			System.out.println(user.getUsername()+user.getPassword());
 			return authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(
 				user.getUsername(),
@@ -53,7 +48,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			));
 			
 		} catch (Exception e) {
-		throw new RuntimeException(e);
+			throw new RuntimeException(e);
 		}
 		
 	}
@@ -61,17 +56,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
-		
-		
-		System.out.println("salutttt");
+
 		User springUser=(User)authResult.getPrincipal();
 		String jwtToken=Jwts.builder()
 		.setSubject(springUser.getUsername())
-		.setExpiration(new
-		Date(System.currentTimeMillis()+SecurityConstants.EXPIRATION_TIME))
+		.setExpiration(new Date(System.currentTimeMillis()+SecurityConstants.EXPIRATION_TIME))
 		.signWith(SignatureAlgorithm.HS512, SecurityConstants.SECRET)
 		.claim("roles", springUser.getAuthorities())
 		.compact();
+
 		response.addHeader(SecurityConstants.HEADER_STRING,
 		SecurityConstants.TOKEN_PREFIX+jwtToken);
 		

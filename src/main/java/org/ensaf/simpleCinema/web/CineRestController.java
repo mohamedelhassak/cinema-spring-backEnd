@@ -16,7 +16,7 @@ public class CineRestController {
 
     @PostMapping("/addCine")
     public Cinema addCine(@RequestParam("cine") String cine) throws Exception, JsonProcessingException {
-        return cineService.addCine(cine, (long) -3);
+        return cineService.addCine(cine, null);
     }
 
     @PutMapping("/updateCine/{id}")

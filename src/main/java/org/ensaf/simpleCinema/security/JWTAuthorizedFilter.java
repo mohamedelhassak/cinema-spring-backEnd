@@ -10,13 +10,14 @@ import io.jsonwebtoken.Jwts;
 public class JWTAuthorizedFilter extends OncePerRequestFilter {
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-	FilterChain chain)
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,FilterChain chain)
 	throws IOException, ServletException {
+
 	response.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 	response.setHeader("Access-Control-Allow-Methods"," GET, POST, PATCH, PUT, DELETE, OPTIONS");
 	response.addHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Origin,Origin, Accept, X-Requested-With,Content-Type, Access-Control-Request-Method, Access-Control-RequestHeaders,authorization");
 	response.addHeader("Access-Control-Expose-Headers", "Access-Control-Allow-Origin,Access-Control-Allow-Credentials, authorization");
+
 	if(request.getMethod().equals("OPTIONS")){
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
@@ -24,23 +25,25 @@ public class JWTAuthorizedFilter extends OncePerRequestFilter {
 	else {
 		String jwtToken=request.getHeader(SecurityConstants.HEADER_STRING);
 		if(jwtToken==null || !jwtToken.startsWith(SecurityConstants.TOKEN_PREFIX)) {
-		chain.doFilter(request, response); return;
+			chain.doFilter(request, response); return;
 		}
+
 		Claims claims=Jwts.parser()
 		.setSigningKey(SecurityConstants.SECRET)
 		.parseClaimsJws(jwtToken.replace(SecurityConstants.TOKEN_PREFIX,""))
 		.getBody();
+
 		String username=claims.getSubject();
-		ArrayList<Map<String, String>> roles=(ArrayList<Map<String, String>>)
-		claims.get("roles");
+		ArrayList<Map<String, String>> roles= (ArrayList<Map<String, String>>) claims.get("roles");
 		Collection<GrantedAuthority> authorities=new ArrayList<>();
 		roles.forEach(r->{
 			authorities.add(new SimpleGrantedAuthority(r.get("authority")));
 		});
+
 		UsernamePasswordAuthenticationToken authenticationToken=
-		new UsernamePasswordAuthenticationToken(username, null,authorities);
+			new UsernamePasswordAuthenticationToken(username, null,authorities);
 		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 		chain.doFilter(request, response);
-		}
+	}
 		}
 }
