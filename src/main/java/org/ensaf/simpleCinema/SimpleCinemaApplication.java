@@ -49,7 +49,9 @@ public class SimpleCinemaApplication  implements CommandLineRunner  {
 				Ticket.class,
 				Category.class,
 				Ville.class,
-				Cinema.class);
+				Cinema.class,
+				Seance.class,
+				Projection.class);
 //		cinemaInitService.initUsers();
 //		cinemaInitService.initRoles();
 //		cinemaInitService.initRolesToUser();

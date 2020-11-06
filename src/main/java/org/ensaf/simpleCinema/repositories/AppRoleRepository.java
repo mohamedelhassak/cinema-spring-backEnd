@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 public interface AppRoleRepository extends JpaRepository<AppRole, Long> {
- public AppRole findByRole(String role);
+ AppRole findByRole(String role);
  
 }

@@ -7,12 +7,12 @@ import java.util.Date;
 
 @Projection(name = "filmsProj",types = Film.class)
 public interface FilmProj {
-    public Long getId();
-    public String getTitre();
-    public String getPhoto();
-    public String getRealisateur();
-    public double getDuree();
-    public Date getDate_sortie();
-    public String getDescription();
-    public Category getCategory();
+    Long getId();
+    String getTitre();
+    String getPhoto();
+    String getRealisateur();
+    double getDuree();
+    Date getDate_sortie();
+    String getDescription();
+    Category getCategory();
 }

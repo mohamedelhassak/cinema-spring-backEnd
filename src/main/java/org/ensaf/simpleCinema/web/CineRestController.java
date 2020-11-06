@@ -15,12 +15,12 @@ public class CineRestController {
     private CineService cineService;
 
     @PostMapping("/addCine")
-    public Cinema addCine(@RequestParam("cine") String cine) throws Exception, JsonProcessingException {
+    public Cinema addCine(@RequestParam("cine") String cine) throws Exception {
         return cineService.addCine(cine, null);
     }
 
     @PutMapping("/updateCine/{id}")
-    public Cinema addCine(@RequestParam("cine") String cine,@PathVariable Long id) throws Exception, JsonProcessingException {
+    public Cinema addCine(@RequestParam("cine") String cine,@PathVariable Long id) throws Exception {
         return cineService.addCine(cine, id);
     }
 }

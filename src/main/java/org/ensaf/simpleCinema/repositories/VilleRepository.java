@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin("*")
 @RepositoryRestResource
 public interface VilleRepository extends JpaRepository<Ville,Long> {
-	public Ville  findByName(String name);
+	Ville  findByName(String name);
 }
 

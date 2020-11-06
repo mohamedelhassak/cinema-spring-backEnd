@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin("*")
 @Projection(name = "ticketsProj",types = Ticket.class)
 public interface TicketProjection {
-	public Long getId();
-	public String getNomClient();
-	public double getprix();
-	public Integer getCodePayement();
-	public boolean getEstReserver();
-	public Place getPlace();
+	Long getId();
+	String getNomClient();
+	double getprix();
+	Integer getCodePayement();
+	boolean getEstReserver();
+	Place getPlace();
 }

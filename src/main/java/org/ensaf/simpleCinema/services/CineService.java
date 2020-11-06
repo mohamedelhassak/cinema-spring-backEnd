@@ -24,7 +24,7 @@ public class CineService {
     @Autowired
     private CinemaRepository cinemaRepository;
 
-    public Cinema addCine( String cine , Long id) throws Exception, JsonProcessingException {
+    public Cinema addCine( String cine , Long id) throws Exception {
 
         Cinema cinema  =null ;
         if (id!=null){

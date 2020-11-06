@@ -7,8 +7,8 @@ import java.util.Date;
 @Projection(name = "CinemasProj",types = Cinema.class)
 public interface CinemaProj {
 
-    public Long getId();
-    public String getName();
-    public int getNbSalles();
-    public Ville getVille();
+    Long getId();
+    String getName();
+    int getNbSalles();
+    Ville getVille();
 }

@@ -26,7 +26,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-	private AuthenticationManager authenticationManager;
+	private final AuthenticationManager authenticationManager;
 	@Autowired
 	private  BCryptPasswordEncoder bCryptPasswordEncoder;
 

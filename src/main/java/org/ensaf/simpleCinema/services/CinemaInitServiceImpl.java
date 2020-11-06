@@ -185,7 +185,6 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
 	public void initProjections() {
 		double[] prices = new double[] {30,50,60,70,90,100};
 		java.util.List<Film> films =filmRepository.findAll();
-		System.out.println("lenght films"+films.size());
 		villeRepository.findAll().forEach(v->{
 			v.getCinemas().forEach(c->{
 				c.getSalles().forEach(s->{

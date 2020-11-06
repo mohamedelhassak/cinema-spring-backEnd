@@ -21,7 +21,7 @@ public class FilmService {
     private FilmRepository filmRepository;
     @Autowired
     private CategoryRepository categoryRepository;
-    public Film addFilm(MultipartFile file,String film ,Long id) throws Exception, JsonProcessingException {
+    public Film addFilm(MultipartFile file,String film ,Long id) throws Exception {
         Film film2 =null ;
         String filename =null;
         if (id!=null){

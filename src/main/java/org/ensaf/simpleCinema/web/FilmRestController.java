@@ -40,13 +40,13 @@ public class FilmRestController{
 
 	@PostMapping("/addFilm")
 	public Film addFilm(@RequestParam("file") MultipartFile file,
-				@RequestParam("film") String film) throws Exception, JsonProcessingException {
+				@RequestParam("film") String film) throws Exception {
 		return filmService.addFilm(file,film, null);
 	}
 
 	@PutMapping("/updateFilm/{id}")
 	public Film updateFilm(@RequestParam("file") MultipartFile file,
-						   @RequestParam("film") String film, @PathVariable Long id) throws Exception, JsonProcessingException {
+						   @RequestParam("film") String film, @PathVariable Long id) throws Exception {
 
 		return filmService.addFilm(file,film,id);
 	}
